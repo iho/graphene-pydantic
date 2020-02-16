@@ -7,7 +7,7 @@ import datetime
 import decimal
 import enum
 
-from pydantic import BaseModel
+from pydantic import BaseModel, FilePath, SecretStr, ByteSize
 from pydantic.fields import Field as PydanticField
 
 try:
@@ -139,7 +139,7 @@ def find_graphene_type(
     """
     if type_ == uuid.UUID:
         return UUID
-    elif type_ in (str, bytes):
+    elif type_ in (str, bytes, SecretStr, ByteSize, FilePath):
         return String
     elif type_ == datetime.datetime:
         return DateTime
